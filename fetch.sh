@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# The following shell script helps with pulling data for the Washington state
+# and parts of Idaho.
+
 for station in SEA OLM SEW UIL BLI HWM;
 do
   fetcher --start_date=20150228 --end_date=20150331 --station=${station} --noaa_station=sew --output_dir=./data;
