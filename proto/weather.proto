@@ -1,0 +1,102 @@
+syntax = "proto2";
+
+package com.vagababov.weather;
+
+message Station {
+  optional string code = 1;
+  optional string name = 2;
+  optional float latitude = 3;
+  optional float longitude = 4;
+}
+
+message Observation {
+  // The date of the observation.
+  optional int64 date = 1;
+
+  // Daily min, max and avg temperatures.
+  // Temperatures are converted to Celsius.
+  optional float min_temp = 2;
+  optional float max_temp = 3;
+  optional float avg_temp = 4;
+
+  // Departure from average.
+  optional float dep_temp = 5;
+
+  // Heating and cooling degree days.
+  optional float hdd = 6;
+  optional float cdd = 7;
+
+  // Percipitation in inches.
+  optional float water = 8;
+  optional float snow = 9;
+
+  // Wind in mph.
+  optional int32 average_wind = 10;
+  optional int32 max_2min_wind = 11;
+  optional int32 max_2min_wind_direction = 12;
+
+  // Number of sunshine minutes, -1 if missing.
+  optional int32 sunshine_minutes = 13;
+  optional float possible_sunshine = 14;
+  optional int32 sky_cover = 15;
+
+  enum WeatherCode {
+    FOG_MIST = 1;
+    FOG_QUARTER_MILE = 2;
+    THUNDER = 3;
+    ICE_PELLETS = 4;
+    HAIL = 5;
+    FREEZING_RAING = 6;
+    DUST_STORM = 7;
+    SMOKE_HAZE = 8;
+    BLOWING_SNOW = 9;
+    TORNADO = 10;
+  }
+  repeated WeatherCode codes = 16;
+
+  // Peak wind in mph.
+  optional int32 peak_wind = 17;
+  optional int32 peak_wind_direction = 18;
+}
+
+message Stats {
+  optional float avg_temp_month = 1;
+  optional float dep_from_normal = 2;
+  optional float highest = 3;
+  optional int32 highest_day = 4;
+  optional float lowest = 5;
+  optional int32 lowest_day = 6;
+
+  optional float total_percipitation = 7;
+  optional float dep_from_normal_pcpn = 8;
+  optional float greatest = 9;
+  // Integer specifies date, 6.5 denotes maximum 24hr started on 6th and
+  // finished on 7th.
+  optional float greatest_day = 10;
+
+  optional float total_snow = 11;
+  optional float greatest_snow = 12;
+  optional float greatest_snow_depth = 13;
+
+  optional int32 num_days_max_freezing = 14;
+  optional int32 num_days_max_90 = 15;
+  optional int32 num_days_min_freezing = 16;
+  optional int32 num_days_min_0f = 17;
+
+  // Number of days with percipitation at least _[suffix].
+  optional int32 num_days_001 = 18;
+  optional int32 num_days_01 = 19;
+  optional int32 num_days_05 = 20;
+  optional int32 num_days_1 = 21;
+
+  // HDD/CDD.
+}
+
+message FormF6 {
+  optional Station station = 1;
+  repeated Observation observations = 2;
+  optional Stats stats = 3;
+  // go's time.Time for the beginning of the month, e.g. 20150101:00:00:00.0.
+  optional int64 month_year = 4;
+}
+
