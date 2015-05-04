@@ -2,7 +2,8 @@
 // NOAA site: http://www.wrh.noaa.gov/otx/climate/lcd/lcd.php
 // (C) Victor Agababov (vagababov@gmail.com)
 // Author maintains no responsibility for the functioning of this
-// program. Use at your own risk.
+// program.
+// Use at your own risk.
 package main
 
 import (
